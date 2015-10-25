@@ -40,9 +40,10 @@ namespace Model
         public string CheckCurColour()
         {
             if(_health >= 5)
-                return Colour.HealthColour;
-            else return Colour.SickColour;
-         }
+                _curColour= Colour.HealthColour;
+            else _curColour= Colour.SickColour;
+            return _curColour;
+        }
 
         public int Feed()
         {
