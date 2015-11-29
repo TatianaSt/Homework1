@@ -14,14 +14,21 @@ namespace MITA_Homework_1
             Console.WriteLine("Приветствуем Вас в нашем Зоомагазине!");
             Console.WriteLine("Укажите возраст питомца:");
             var colour = new CatColour("Белый", "Зеленый");
-            var MyLittleKitty = new Cat(Console.ReadLine(), colour);
+            var myLittleKitty = new Cat(colour, Console.ReadLine());
             int cls = 0;
             while (cls != 5)
             {
-                Helper.ChangeConsoleColour(MyLittleKitty.CheckCurColour());
-                Console.WriteLine($"Питомец:{MyLittleKitty.Name}");
-                Console.WriteLine($"Возраст:{MyLittleKitty.Age}");
-                Console.WriteLine($"Текущий цвет:{MyLittleKitty.CheckCurColour()}");
+                if (myLittleKitty.CurrentColour == colour.HealthColour)
+                {
+                    Helper.ChangeConsoleColour(myLittleKitty.CurrentColour, 1);
+                }
+                else
+                {
+                    Helper.ChangeConsoleColour(myLittleKitty.CurrentColour, 0);
+                }
+                Console.WriteLine($"Питомец:{myLittleKitty.Name}");
+                Console.WriteLine($"Возраст:{myLittleKitty.Age}");
+                Console.WriteLine($"Текущий цвет:{myLittleKitty.CurrentColour}");
 
                 Console.WriteLine("1 - Задать имя;" + "\n" + "2 - Задать цвет;" + "\n" + "3 - Покормить;" + "\n" +
                                   "4 - Ударить;" + "\n" + "5 - Выход;");
@@ -29,37 +36,32 @@ namespace MITA_Homework_1
                 switch (cls)
                 {
                     case 1:
-                    {
-                        Console.WriteLine("Введите имя питомца:");
-                        MyLittleKitty.Name = Console.ReadLine();
+                      Console.WriteLine("Введите имя питомца:");
+                      myLittleKitty.Name = Console.ReadLine();
                         break;
-                    }
+                    
                     case 2:
-                    {
                         Console.WriteLine("Доступные цвета:" + "\n" + "Ж - Жёлтый;" + "\n" + "К - Красный;" + "\n" +
                                           "С - Синий;" + "\n" + "П - Пурпурный;" + "\n" + "Б - Белый;" + "\n" +
                                           "З - Зелёный;" + "\n");
 
                         Console.WriteLine("Желаемый цвет здорового кота:");
-                        MyLittleKitty.Colour.HealthColour = Console.ReadLine();
+                        myLittleKitty.Colour.HealthColour = Console.ReadLine();
                         Console.WriteLine("Цвет кота в болезненном состоянии:");
-                        MyLittleKitty.Colour.SickColour = Console.ReadLine();
+                        myLittleKitty.Colour.SickColour = Console.ReadLine();
                         break;
-                    }
+                    
                     case 3:
-                    {
-                        MyLittleKitty.Feed();
+                    myLittleKitty.Feed();
                         break;
-                    }
+                    
                     case 4:
-                    {
-                        MyLittleKitty.Punish();
+                        myLittleKitty.Punish();
                         break;
-                    }
+                    
                     case 5:
-                    {
-                        break;
-                    }
+                    break;
+                    
                 }
                }
 
@@ -71,29 +73,43 @@ namespace MITA_Homework_1
 
     public abstract class Helper
     {
-        public static void ChangeConsoleColour(string col)
+        public static void ChangeConsoleColour(string col, int rslt)
         {
             col = col.ToUpper();
-            switch (col[0])
+            if (col != "Ж" && col != "К" && col != "С" && col != "П" && col != "Б" && col != "З")
             {
-                case 'Ж':
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    break;
-                case 'К':
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    break;
-                case 'С':
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    break;
-                case 'П':
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    break;
-                case 'Б':
+                if (rslt == 1)
+                {
                     Console.ForegroundColor = ConsoleColor.White;
-                    break;
-                case 'З':
+                }
+                else
+                {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    break;
+                }
+            }
+            else
+            {
+                switch (col[0])
+                {
+                    case 'Ж':
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        break;
+                    case 'К':
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        break;
+                    case 'С':
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        break;
+                    case 'П':
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        break;
+                    case 'Б':
+                        Console.ForegroundColor = ConsoleColor.White;
+                        break;
+                    case 'З':
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        break;
+                }
             }
         }
 

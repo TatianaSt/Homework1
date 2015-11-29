@@ -10,39 +10,62 @@ namespace Model
     {
         private string _name;
         private int _health;
-        private string _curColour;
-        public Cat(string age, CatColour col)
+        private readonly string _age;
+        private object _currentColour;
+        public string Age {
+            get { return _age; } 
+        }
+
+
+        public Cat(CatColour col, string age)
         {
-            Age = age;
+            _age = age;
             Colour = col;
             _health = 5;
         }
         public CatColour Colour { set; get; }
         
-
-      
-
         public string Name
         {
             set
             {
                 if (string.IsNullOrEmpty(_name))
+                {
                     _name = value;
-                else Console.WriteLine("Ваш питомец сконфужен, он привык к своему прежнему имени");
+                }
+                else
+                {
+                    Console.WriteLine("Ваш питомец сконфужен, он привык к своему прежнему имени");
+                }
             }
+
             get { return _name; }
         }
 
-        public object CurrentColour { get; set; }
-
-        public readonly string Age;
-
-        public string CheckCurColour()
+        public string CurrentColour
         {
-            if(_health >= 5)
-                _curColour= Colour.HealthColour;
-            else _curColour= Colour.SickColour;
-            return _curColour;
+            get
+            {
+                if (_health >= 5)
+                {
+                    return Colour.HealthColour;
+                }
+                else
+                {
+                    return Colour.SickColour;
+                }
+            }
+            set
+            {
+                if (_health >= 5)
+                {
+                    _currentColour= Colour.HealthColour;
+                }
+                else
+                {
+                    _currentColour= Colour.SickColour;
+                }
+            }
         }
 
         public int Feed()
@@ -50,13 +73,11 @@ namespace Model
             _health = _health + 1;
             return _health;
         }
+
         public int Punish()
         {
-            if (_health > 0)
-                _health = _health - 1;
-            else if(_health==0)
-                Console.WriteLine("Ваш питомец очень болен. Прекратите его наказывать");
-            return _health;
+           _health = _health - 1;
+           return _health;
         }
 
        
