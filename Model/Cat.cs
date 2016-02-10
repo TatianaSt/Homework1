@@ -11,7 +11,7 @@ namespace Model
         private string _name;
         private int _health;
         private readonly string _age;
-        private object _currentColour;
+       
         public string Age {
             get { return _age; } 
         }
@@ -54,18 +54,8 @@ namespace Model
                 {
                     return Colour.SickColour;
                 }
-            }
-            set
-            {
-                if (_health >= 5)
-                {
-                    _currentColour= Colour.HealthColour;
-                }
-                else
-                {
-                    _currentColour= Colour.SickColour;
-                }
-            }
+            
+           }
         }
 
         public int Feed()

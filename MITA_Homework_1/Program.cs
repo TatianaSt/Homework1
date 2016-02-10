@@ -32,6 +32,7 @@ namespace MITA_Homework_1
 
                 Console.WriteLine("1 - Задать имя;" + "\n" + "2 - Задать цвет;" + "\n" + "3 - Покормить;" + "\n" +
                                   "4 - Ударить;" + "\n" + "5 - Выход;");
+
                 cls = Convert.ToInt32((Console.ReadLine()));
                 switch (cls)
                 {
